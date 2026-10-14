@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clockify BILD-AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <h1>Clockify <span>BILD-AI</span></h1>
+  </header>
+
+  <main>
+    <!-- Timer -->
+    <section class="card timer-bar">
+      <input id="timer-description" placeholder="What are you working on?" autocomplete="off">
+      <input id="timer-project" list="project-list" placeholder="Project" autocomplete="off">
+      <span id="timer-display" class="timer-display">0:00:00</span>
+      <button id="timer-button" class="primary">Start</button>
+    </section>
+
+    <!-- Tools: manual entry and spreadsheet download -->
+    <section class="tools">
+      <button id="manual-toggle">+ Add time manually</button>
+      <form id="export-form" class="export">
+        <label>From <input type="date" id="export-from" required></label>
+        <label>To <input type="date" id="export-to" required></label>
+        <button type="submit">Download spreadsheet</button>
+      </form>
+    </section>
+
+    <div id="manual-container"></div>
+
+    <p id="message" class="message" hidden></p>
+
+    <!-- Entries, grouped by day -->
+    <section id="entries"></section>
+  </main>
+
+  <datalist id="project-list"></datalist>
+
+  <!-- Form used both for adding time manually and for editing an entry -->
+  <template id="entry-form-template">
+    <form class="card entry-form">
+      <input name="description" placeholder="Description (optional)" autocomplete="off">
+      <input name="project" list="project-list" placeholder="Project" autocomplete="off">
+      <input name="date" type="date" required>
+      <input name="start" class="time" placeholder="09:00" required autocomplete="off">
+      <span>–</span>
+      <input name="end" class="time" placeholder="17:00" required autocomplete="off">
+      <button type="submit" class="primary">Save</button>
+      <button type="button" class="cancel">Cancel</button>
+    </form>
+  </template>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
