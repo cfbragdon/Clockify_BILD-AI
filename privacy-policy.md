@@ -1,0 +1,1 @@
+This application stores time-tracking information locally on the user's computer.
