@@ -1,0 +1,1 @@
+Users are responsible for the accuracy of their recorded working hours.
