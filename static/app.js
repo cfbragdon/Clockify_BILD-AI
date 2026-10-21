@@ -35,7 +35,8 @@ function formatDuration(ms) {
 }
 
 const formatTime = (d) => `${pad(d.getHours())}:${pad(d.getMinutes())}`;
-const dateKey = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+const minuteOf = (iso) => Math.floor(new Date(iso) / 60000) * 60000;
+const dateKey = (d) =>`${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 
 function dayLabel(d) {
   const today = new Date();
@@ -129,6 +130,7 @@ async function toggleTimer() {
 function buildEntryForm(entry, onDone) {
   const form = $("#entry-form-template").content.firstElementChild.cloneNode(true);
   const f = form.elements;
+  let endDayOffset = 0; // days between start and end, for entries that run past midnight
 
   if (entry) {
     const start = new Date(entry.start_at);
@@ -138,6 +140,7 @@ function buildEntryForm(entry, onDone) {
     f.date.value = dateKey(start);
     f.start.value = formatTime(start);
     f.end.value = formatTime(end);
+    endDayOffset = Math.round((new Date(dateKey(end)) - new Date(dateKey(start))) / 86400000);
   } else {
     f.date.value = dateKey(new Date());
   }
@@ -152,8 +155,16 @@ function buildEntryForm(entry, onDone) {
     }
     const [y, mo, d] = f.date.value.split("-").map(Number);
     const startAt = new Date(y, mo - 1, d, start.h, start.m);
-    const endAt = new Date(y, mo - 1, d, end.h, end.m);
-    if (endAt < startAt) endAt.setDate(endAt.getDate() + 1); // past midnight
+    const endAt = new Date(y, mo - 1, d + endDayOffset, end.h, end.m);
+    if (entry) {
+      // Keep the saved seconds when a time is left unchanged
+      if (startAt.getTime() === minuteOf(entry.start_at)) startAt.setTime(new Date(entry.start_at));
+      if (endAt.getTime() === minuteOf(entry.end_at)) endAt.setTime(new Date(entry.end_at));
+    }
+    if (endAt <= startAt) {
+      showMessage("The end time must be after the start time. Nothing was saved.");
+      return;
+    }
 
     const body = {
       description: f.description.value,
