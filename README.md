@@ -1,5 +1,6 @@
-# Clockify BILD-AI
-
+76
+]\\\\\\\\\'+//
+89m=
 A simple personal time tracker, inspired by Clockify. Runs on this computer only.
 
 > **Status:** working prototype.
@@ -36,3 +37,4 @@ python -m venv "$env:LOCALAPPDATA\clockify-bild-ai\venv"
 
 ## Why it exists
 Built as a personal tool, and as a way to learn Git.
+This project is part of the BILD-AI training program.
