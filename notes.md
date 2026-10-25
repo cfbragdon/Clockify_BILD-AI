@@ -5,3 +5,4 @@ Clockify Chris is a local time-tracking application developed as part of the BIL
 The application runs on the user's computer and stores time-tracking information locally.
 G2: First practice change.
 G2: Second practice change.
+G2: Third practice change.
