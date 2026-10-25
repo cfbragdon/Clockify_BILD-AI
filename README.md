@@ -1,5 +1,9 @@
 76
 ]\\\\\\\\\'+//
+Name of app: Clockify Chris
+
+App purpose> hold Chris accountable
+
 89m=
 A simple personal time tracker, inspired by Clockify. Runs on this computer only.
 
