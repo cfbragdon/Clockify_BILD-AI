@@ -42,3 +42,9 @@ python -m venv "$env:LOCALAPPDATA\clockify-bild-ai\venv"
 ## Why it exists
 Built as a personal tool, and as a way to learn Git.
 This project is part of the BILD-AI training program.
+
+## How to run
+
+Run this command in PowerShell from the Clockify project folder:
+
+& "$env:LOCALAPPDATA\clockify-bild-ai\venv\Scripts\python.exe" app.py
