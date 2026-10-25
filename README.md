@@ -9,7 +9,7 @@ A simple personal time tracker, inspired by Clockify. Runs on this computer only
 
 > **Status:** working prototype.
 
-## What it does
+## Features
 - **Timer** — type an optional description, pick a project (or type a new name to create one), press Start / Stop.
 - **Manual entries** — add time you forgot to track.
 - **Entries list** — newest first, grouped by day, with a total for each day. Entries can be edited and deleted.
